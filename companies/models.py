@@ -13,10 +13,10 @@ class TaskStatus(models.Model):
     codename=models.CharField(max_length=155)
 
     class Meta:
-        db_table = 'compaies_task_status'
+        db_table = 'companies_task_status'
 
-class Taks(models.Model):
-    tutle=models.TextField()
+class Task(models.Model):
+    title=models.TextField()
     description=models.TextField(null=True)
     due_data=models.DateTimeField(null=True)
     created_at=models.DateTimeField(auto_now_add=True)
