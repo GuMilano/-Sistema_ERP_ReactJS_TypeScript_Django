@@ -6,11 +6,12 @@ from companies.serializers import EmployeeSerializer, EmployeesSerializer
 from accounts.auth import Authentication
 from accounts.models import User, User_Groups
 
-from rest_framework.response import Response, status
+from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.exceptions import APIException
 
 
-class Employess(Base):
+class Employees(Base):
     permission_classes = [EmployeesPermission]
 
     def get(self, request):
