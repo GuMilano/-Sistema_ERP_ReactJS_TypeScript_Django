@@ -24,7 +24,7 @@ class Authentication:
         return user
     
 
-    def signup(self, name, email, password, type_account='owner', company_id=False):
+    def signup(self, name, email, password, type_account='owner', enterprise_id=False):
         if not name or name == '':
             raise APIException('Nome é obrigatório !')
         
@@ -34,7 +34,7 @@ class Authentication:
         if not password or password == '':
             raise APIException('A senha é obrigatória !')
         
-        if type_account =='employee' and not company_id:
+        if type_account =='employee' and not enterprise_id:
             raise APIException('Empresa é obrigatória !')
         
 
@@ -48,7 +48,7 @@ class Authentication:
             name=name,
             email=email,
             password=password_hashed,
-            is_owner=0 if type_account == 'owner' else 1
+            is_owner=1 if type_account == 'owner' else 0
         )
 
         if type_account == 'owner':
@@ -59,7 +59,7 @@ class Authentication:
 
         if type_account == 'employee':
             Employee.objects.create(
-                enterprise_id=company_id or created_enterprise.id,
+                enterprise_id=enterprise_id or created_enterprise.id,
                 user_id=created_user.id  
             )
         return created_user

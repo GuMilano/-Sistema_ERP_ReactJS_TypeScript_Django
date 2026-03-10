@@ -37,6 +37,7 @@ class Employees(Base):
             name=name,
             email=email,
             password=password,
+            type_account='employee',
             enterprise_id=enterprise_id
         )    
         if isinstance(signup_user, User):
@@ -55,8 +56,8 @@ class EmployeeDetail(Base):
     def put(self, request, employee_id):
         groups = request.data.get('groups')
         employee = self.get_employee(employee_id, request.user.id)
-        name = request.data.get('name') or employee.name
-        email = request.data.get('email') or employee.email
+        name = request.data.get('name') or employee.user.name
+        email = request.data.get('email') or employee.user.email
         
         if email != employee.user.email and User.objects.filter(email=email).exists():
             raise APIException("Esse email já está em uso", code="email_already_use")
