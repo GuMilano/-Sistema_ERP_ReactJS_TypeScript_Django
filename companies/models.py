@@ -8,4 +8,19 @@ class Employee(models.Model):
     user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
 
-class 
+class TaskStatus(models.Model):
+    name=models.CharField(max_length=155)
+    codename=models.CharField(max_length=155)
+
+    class Meta:
+        db_table = 'compaies_task_status'
+
+class Taks(models.Model):
+    tutle=models.TextField()
+    description=models.TextField(null=True)
+    due_data=models.DateTimeField(null=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(null=True)
+    status=models.ForeignKey(TaskStatus, on_delete=models.CASCADE)
+    enterprise=models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+    employee=models.ForeignKey(Employee, on_delete=models.CASCADE)
